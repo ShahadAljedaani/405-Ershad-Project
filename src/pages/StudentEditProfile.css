@@ -1,0 +1,88 @@
+:root {
+  --purple-dark: #5A2FC2;
+  --purple-light: #9C7DFF;
+  --purple-bg: #f5efff;
+  --white: #fff;
+  --text-dark: #2a2a2a;
+}
+
+/* الصفحة كاملة داخل main-content */
+.edit-profile-page {
+  padding: 40px;
+  background: var(--purple-bg);
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+/* العنوان */
+.edit-title {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+}
+
+.edit-subtitle {
+  color: #555;
+  margin-bottom: 25px;
+}
+
+/* كارد التعديل */
+.edit-card {
+  background: var(--white);
+  padding: 30px 35px;
+  border-radius: 14px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.12);
+  width: 100%;
+  max-width: 600px;
+}
+
+/* العناصر داخل الفورم */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  color: var(--text-dark);
+}
+
+.icon {
+  margin-right: 8px;
+  color: var(--purple-dark);
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid var(--purple-light);
+  outline: none;
+  font-size: 15px;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--purple-dark);
+}
+
+/* الزر */
+.save-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--purple-dark);
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.save-btn:hover {
+  background: var(--purple-light);
+}

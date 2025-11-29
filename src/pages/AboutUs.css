@@ -1,0 +1,157 @@
+:root {
+  --purple: #6a1bff;
+  --purple-dark: #5a2fc2;
+  --purple-light: #9c7dff;
+  --bg: #f4efff;
+  --white: #fff;
+  --text-dark: #2a2a2a;
+}
+
+/* Page Container */
+.about-page {
+  background: var(--bg);
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+.about-header {
+  width: 100%;
+  padding: 8px 40px;       
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;            
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--purple-dark);
+}
+
+.about-header nav a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: var(--purple-dark);
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.about-header nav a:hover {
+  color: var(--purple);
+}
+
+/* Main Content */
+.about-main {
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+  margin-top: -70px;        
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.title span {
+  color: var(--purple);
+}
+
+.subtitle {
+  color: #555;
+  font-size: 20px;
+  max-width: 650px;
+  margin: 5px auto 30px;   
+}
+
+/* Cards Section */
+.about-cards {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.card {
+  background: var(--white);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  text-align: left;
+  width: 310px;
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.card-icon {
+  font-size: 32px;
+  color: var(--purple-dark);
+  margin-bottom: 12px;
+}
+
+/* Text inside card */
+.card h3 {
+  color: var(--purple-dark);
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Back Button */
+.back-btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 12px 28px;
+  background: var(--purple);
+  color: var(--white);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.back-btn:hover {
+  background: var(--purple-dark);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-main {
+    margin-top: -40px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+}

@@ -1,0 +1,131 @@
+:root {
+  --purple-dark: #5A2FC2;
+  --purple-light: #9C7DFF;
+  --purple-bg: #f5efff;
+  --white: #fff;
+  --text-dark: #2a2a2a;
+}
+
+.upload-page-container {
+  display: flex;
+  height: 100vh;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+
+
+.menu a:hover,
+.menu a.active {
+  background: var(--purple-dark);
+}
+
+
+.logout:hover {
+  background: #ff2b2b;
+}
+
+/* Main */
+.upload-main {
+  flex: 1;
+  background: var(--purple-bg);
+  padding: 40px;
+  overflow-y: auto;
+}
+
+/* Header */
+.upload-header h1 {
+  font-size: 30px;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.upload-header p {
+  color: #555;
+  margin-bottom: 25px;
+}
+
+/* Card Form */
+.upload-card {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0px 4px 16px rgba(0,0,0,0.12);
+  max-width: 700px;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  color: var(--text-dark);
+}
+
+.form-icon {
+  margin-right: 8px;
+  color: var(--purple-dark);
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 11px;
+  border-radius: 8px;
+  border: 2px solid var(--purple-light);
+  outline: none;
+  font-size: 15px;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--purple-dark);
+}
+
+/* File Upload Box */
+.file-box {
+  border: 2px dashed var(--purple-light);
+  padding: 14px;
+  border-radius: 8px;
+  background: #faf7ff;
+}
+
+.file-box input {
+  border: none;
+  padding: 0;
+}
+
+.file-hint {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #666;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--purple-dark);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  background: var(--purple-light);
+}
+
+.btn-icon {
+  font-size: 16px;
+}

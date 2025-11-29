@@ -1,0 +1,146 @@
+/* ================= Colors ================= */
+:root {
+  --purple-dark: #5A2FC2;
+  --purple-light: #9C7DFF;
+  --purple-bg: #F5EFFf;
+  --white: #ffffff;
+  --text-dark: #2a2a2a;
+}
+
+/* ================= Layout ================= */
+.home-container {
+  background: var(--purple-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* ================= Navbar ================= */
+.navbar {
+  width: 100%;
+  max-width: 1300px;
+  padding: 25px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--purple-dark);
+}
+
+.nav-links a {
+  margin-left: 20px;
+  color: var(--purple-dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--purple-light);
+}
+
+/* ================= Hero Section ================= */
+.hero-section {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+  padding: 60px 20px;
+  margin-top: 40px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.centered-hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-section h1 {
+  font-size: 48px;
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+.hero-section h1 span {
+  color: var(--purple-dark);
+}
+
+.subtitle {
+  max-width: 650px;
+  margin: 20px auto 30px;
+  font-size: 20px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* ================= Buttons ================= */
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn {
+  padding: 12px 26px;
+  border-radius: 10px;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+/* Purple Button */
+.btn.primary {
+  background: var(--purple-dark);
+  color: var(--white);
+}
+
+.btn.primary:hover {
+  background: var(--purple-light);
+}
+
+/* Secondary Button */
+.btn.secondary {
+  background: var(--white);
+  color: var(--purple-dark);
+  border: 2px solid var(--purple-dark);
+}
+
+.btn.secondary:hover {
+  background: var(--purple-light);
+  color: var(--white);
+}
+
+/* Outline Button */
+.btn.outline {
+  border: 2px solid var(--purple-dark);
+  background: transparent;
+  color: var(--purple-dark);
+}
+
+.btn.outline:hover {
+  background: var(--purple-dark);
+  color: white;
+}
+
+/* ================= Animations ================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,140 @@
+:root {
+  --purple: #6a1bff;
+  --purple-dark: #5a15d1;
+  --white: #fff;
+  --gray-text: #555;
+}
+
+/* ===== الصفحة كاملة ===== */
+.profile-page {
+  background: #f4efff;
+  min-height: 100vh;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== العنوان ===== */
+.profile-header {
+  font-size: 30px;
+  font-weight: 800;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.profile-subtext {
+  color: #666;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+/* ===== الكارد ===== */
+.profile-card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--white);
+  padding: 30px 35px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;      
+  gap: 10px;
+}
+
+/* ===== الصورة (Avatar) ===== */
+.profile-avatar {
+  width: 85px;
+  height: 85px;
+  background: var(--purple);
+  color: white;
+
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.profile-name {
+  width: 100%;
+  text-align: center;
+  margin-top: 5px;     
+}
+
+
+.profile-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+
+
+/* ===== الأقسام ===== */
+.profile-section {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--purple-dark);
+  margin-bottom: 12px;
+  text-align: center;      
+}
+
+/* ===== صف المعلومات الواحد ===== */
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  text-align: left;       
+}
+
+.info-icon {
+  font-size: 20px;
+  color: var(--purple);
+  min-width: 22px;
+}
+
+.info-label {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.info-value {
+  font-size: 15px;
+  color: var(--gray-text);
+  word-break: break-word;
+}
+
+/* ===== زر تعديل ===== */
+.edit-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--purple);
+  color: var(--white);
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+
+  margin-top: 20px;
+}
+
+.edit-btn:hover {
+  background: var(--purple-dark);
+}

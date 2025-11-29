@@ -1,0 +1,17 @@
+.layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+  background: #f4efff;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.no-sidebar .main-content {
+  padding: 0;
+}

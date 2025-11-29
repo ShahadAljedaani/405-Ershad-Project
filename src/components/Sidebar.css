@@ -1,0 +1,69 @@
+:root {
+  --purple-dark: #5A2FC2;
+  --purple-light: #9C7DFF;
+  --purple-bg: #f5efff;
+  --white: #fff;
+  --text-dark: #2a2a2a;
+}
+
+/* ===== Sidebar Container ===== */
+.sidebar {
+  width: 240px;
+  background: #9C7DFF;
+  color: var(--white);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;      
+  flex-shrink: 0;         
+  position: relative;
+  z-index: 10;            
+  box-sizing: border-box;
+}
+
+.sidebar-logo {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* ===== Menu ===== */
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  margin-bottom: 20px;
+}
+
+.sidebar-menu a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 16px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  transition: 0.3s;
+  gap: 10px;
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+  background: var(--purple-dark);
+}
+
+/* ===== Logout ===== */
+.logout a {
+  background: #ff4f4f !important;
+  border-radius: 8px;
+}
+
+.logout a:hover {
+  background: #ff2b2b !important;
+}
