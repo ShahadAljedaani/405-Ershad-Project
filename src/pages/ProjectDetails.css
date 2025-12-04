@@ -1,172 +1,223 @@
-:root {
-  --purple-dark: #5A2FC2;
-  --purple-light: #9C7DFF;
-  --purple-bg: #f5efff;
-  --white: #fff;
-  --text-dark: #2a2a2a;
-}
-
 .project-details-page {
-  display: flex;
-  min-height: 100vh;  
-  height: auto;       
-  font-family: "Segoe UI", Tahoma, sans-serif;
+  padding: 32px 48px;
+  background: radial-gradient(circle at top left, #f6e9ff, #f3f0ff);
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-
-/* Sidebar */
-.sidebar {
-  width: 240px;
-  background: #9c7dff;
-  color: var(--white);
-  padding: 30px 20px;
-}
-
-.sidebar-logo {
-  text-align: center;
-  font-size: 26px;
-  font-weight: bold;
-  margin-bottom: 40px;
-}
-
-.menu {
-  list-style: none;
-  padding: 0;
-}
-
-.menu li {
-  margin-bottom: 20px;
-}
-
-.menu a {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  color: var(--white);
-  text-decoration: none;
-  border-radius: 8px;
-  transition: 0.3s;
-}
-
-.menu a:hover,
-.menu a.active {
-  background: var(--purple-dark);
-}
-
-.menu-icon {
-  margin-right: 10px;
-  font-size: 18px;
-}
-
-.logout {
-  margin-top: 40px;
-  background: #ff4d4d !important;
-  border-radius: 8px;
-}
-
-/* Main Content */
-.project-main {
-  flex: 1;
-  padding: 40px;
-  background: var(--purple-bg);
-}
-
-.back-btn {
+/* Back button */
+.project-back-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--purple-dark);
-  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: none;
+  background: #6f3de9;
+  color: #fff;
   font-weight: 600;
-  margin-bottom: 15px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(75, 41, 180, 0.25);
+  margin-bottom: 24px;
 }
 
-.title {
-  font-size: 32px;
-  font-weight: bold;
-  color: var(--purple-dark);
+.project-back-btn svg {
+  font-size: 14px;
 }
 
-.subtitle {
-  color: #444;
-  font-size: 18px;
+/* Header */
+.project-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.project-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #3b166d;
+  margin-bottom: 6px;
+}
+
+.project-subtitle {
+  font-size: 15px;
+  color: #7a6a99;
+}
+
+/* Card */
+.project-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 22px;
+  padding: 28px 32px 26px;
+  box-shadow: 0 14px 40px rgba(76, 20, 140, 0.12);
+  box-sizing: border-box;
+}
+
+.project-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #3b166d;
+  margin-bottom: 14px;
+}
+
+.project-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #41345a;
   margin-bottom: 20px;
 }
 
-/* Details Card */
-.details-card {
-  background: var(--white);
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.1);
+.project-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
-.desc-text {
-  color: #333;
-  margin-bottom: 15px;
-  line-height: 1.6;
+.meta-label {
+  font-weight: 600;
+  color: #372a63;
+  min-width: 80px;
 }
 
-.status {
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  color: white;
-  display: inline-block;
-  margin-bottom: 15px;
+.meta-value {
+  color: #41345a;
 }
 
-.status.pending { background: #ffc107; }
-.status.approved { background: #28a745; }
-.status.rejected { background: #dc3545; }
+/* Status pills */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
 
-/* Attachment */
+.status-pending {
+  background: #ffecc7;
+  color: #b57400;
+}
+
+.status-approved {
+  background: #dcf8e5;
+  color: #137b32;
+}
+
+.status-rejected {
+  background: #ffe0e0;
+  color: #c03434;
+}
+
+/* Attachment box */
+.attachments-row {
+  align-items: center;
+}
+
 .attachment-box {
   display: flex;
   align-items: center;
-  gap: 12px;
-  background: #ece7ff;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  gap: 10px;
+  flex: 1;
+  background: #f6f2ff;
+  border-radius: 12px;
+  padding: 8px 12px;
 }
 
-.download-btn {
-  margin-left: auto;
-  text-decoration: none;
-  color: var(--purple-dark);
-  font-weight: bold;
+.attachment-icon {
+  font-size: 14px;
+  color: #6f3de9;
 }
 
-/* Buttons */
-.actions {
-  margin-top: 20px;
-  display: flex;
-  gap: 15px;
+.attachment-name {
+  font-size: 14px;
+  color: #3b166d;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.request-btn,
-.delete-btn,
-.edit-btn {
-  padding: 12px 20px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
+.attachment-download {
+  font-size: 13px;
   font-weight: 600;
+  color: #6f3de9;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.attachment-download svg {
+  font-size: 12px;
+}
+
+/* Action buttons */
+.project-actions {
+  margin-top: 22px;
+  display: flex;
+  gap: 10px;
+}
+
+.project-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.project-btn-danger {
+  background: #ff5a5f;
+  color: #fff;
+}
+
+.project-btn-secondary {
+  background: #e4ddff;
+  color: #4b30d2;
+}
+.project-actions {
+  margin-top: 1.8rem;
+  display: flex;
+  gap: 1rem;
+}
+
+/* DELETE BUTTON */
+.btn-delete-project {
+  background-color: #f87171;
   color: white;
+  padding: 0.65rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
-.request-btn {
-  background: var(--purple-dark);
-}
-.request-btn:hover {
-  background: var(--purple-light);
+.btn-delete-project:hover {
+  background-color: #ef4444;
+  transform: translateY(-2px);
 }
 
-.delete-btn {
-  background: #ff4d4d;
+/* EDIT BUTTON */
+.btn-edit-project {
+  background-color: #a78bfa;
+  color: white;
+  padding: 0.65rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
-.edit-btn {
-  background: #17a2b8;
+.btn-edit-project:hover {
+  background-color: #8b5cf6;
+  transform: translateY(-2px);
 }

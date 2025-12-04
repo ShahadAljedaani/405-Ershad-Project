@@ -1,67 +1,79 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./Supervisors.css";
-import { FaSearch } from "react-icons/fa";
-import { toast } from "react-toastify";
 
 function Supervisors() {
-  const supervisors = [
-    { id: 1, name: "Dr. Rania Alhazmi", title: "Assistant Professor", field: "Blockchain & Web Development", email: "Rania@gmail.com", experience: 5 },
-    { id: 2, name: "Dr. Afraa Attia", title: "Assistant Professor", field: "Networking", email: "Afraa@gmail.com", experience: 4 },
-    { id: 3, name: "Dr. Duaa Sinnari", title: "Assistant Professor", field: "Game Development", email: "Duaa@gmail.com", experience: 6 },
-    { id: 4, name: "Suaad Baawidan", title: "Assistant Professor", field: "Graphics & Animation", email: "Suaad@gmail.com", experience: 5 },
-    { id: 5, name: "Hind Almisbahi", title: "Assistant Professor", field: "Artificial Intelligence & Data Mining", email: "Hind@gmail.com", experience: 7 },
-    { id: 6, name: "Aisha Asseri", title: "Assistant Professor", field: "Security", email: "Aisha@gmail.com", experience: 6 },
-    { id: 7, name: "Amirah Alshumrani", title: "Assistant Professor", field: "Database", email: "Amirah@gmail.com", experience: 5 },
-    { id: 8, name: "Munira Tailab", title: "Assistant Professor", field: "Software Engineering", email: "Munira@gmail.com", experience: 6 },
-    { id: 9, name: "Hanan Alotaibi", title: "Assistant Professor", field: "Software Economics", email: "Hanan@gmail.com", experience: 7 },
-    { id: 10, name: "Noor Bajunaied", title: "Assistant Professor", field: "Technical Projects Management", email: "Noor@gmail.com", experience: 4 }
-  ];
+  const [supervisors, setSupervisors] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const [search, setSearch] = useState("");
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:8888/ershad-api/list_supervisors.php",
+          { withCredentials: true }
+        );
+        setSupervisors(res.data.supervisors || []);
+      } catch (err) {
+        console.error("Failed loading supervisors", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
+  }, []);
+
+  const sendRequest = async (supervisorId) => {
+    try {
+      await axios.post(
+        "http://localhost:8888/ershad-api/create_request.php",
+        {
+          supervisor_id: supervisorId,
+          message: "I would like you to supervise my project.",
+        },
+        { withCredentials: true }
+      );
+
+      alert("Request sent to supervisor!");
+    } catch (err) {
+      console.error(err);
+      alert(
+        err.response?.data?.error ||
+          "Could not send request. Please check the console."
+      );
+    }
+  };
 
   return (
-    <div className="supervisors-main"> 
+    <div className="supervisors-page">
+      <h2 className="supervisors-title">Available Supervisors</h2>
 
-      <h1 className="page-title">Supervisors List</h1>
-      <p className="page-subtitle">Find supervisors based on field and expertise.</p>
+      {loading && <p className="supervisors-info">Loading…</p>}
 
-      <div className="search-bar">
-        <FaSearch className="search-icon" />
-        <input
-          type="text"
-          placeholder="Search by name or field..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      {!loading && supervisors.length === 0 && (
+        <p className="supervisors-info">No supervisors available yet.</p>
+      )}
+
+      <div className="supervisor-list">
+        {supervisors.map((s) => (
+          <div key={s.id} className="supervisor-card">
+            <h3 className="supervisor-name">{s.name}</h3>
+            <p className="supervisor-line">Email: {s.email}</p>
+            <p className="supervisor-line">Title: {s.title || "-"}</p>
+            <p className="supervisor-line">
+              Expertise: {s.expertise || "-"}
+            </p>
+
+            <button
+              className="request-btn"
+              onClick={() => sendRequest(s.id)}
+            >
+              Send Request
+            </button>
+          </div>
+        ))}
       </div>
-
-      <div className="supervisors-grid">
-        {supervisors
-          .filter((sup) =>
-            sup.name.toLowerCase().includes(search.toLowerCase()) ||
-            sup.field.toLowerCase().includes(search.toLowerCase())
-          )
-          .map((sup) => (
-            <div key={sup.id} className="supervisor-card">
-              <div className="profile-circle">{sup.name.charAt(0)}</div>
-
-              <h3>{sup.name}</h3>
-              <p><strong>Title:</strong> {sup.title}</p>
-              <p><strong>Field:</strong> {sup.field}</p>
-              <p><strong>Email:</strong> {sup.email}</p>
-              <p><strong>Experience:</strong> {sup.experience} years</p>
-
-              <button
-                className="request-btn"
-                onClick={() => toast.success("Your supervision request has been sent!")}
-              >
-                Request Supervision
-              </button>
-
-            </div>
-          ))}
-      </div>
-
     </div>
   );
 }

@@ -1,88 +1,106 @@
-:root {
-  --purple-dark: #5A2FC2;
-  --purple-light: #9C7DFF;
-  --purple-bg: #f5efff;
-  --white: #fff;
-  --text-dark: #2a2a2a;
-}
-
-/* الصفحة كاملة داخل main-content */
-.edit-profile-page {
-  padding: 40px;
-  background: var(--purple-bg);
-  min-height: 100vh;
-  font-family: "Segoe UI", Tahoma, sans-serif;
-}
-
-/* العنوان */
-.edit-title {
-  font-size: 30px;
-  font-weight: 800;
-  color: var(--text-dark);
-  margin-bottom: 5px;
-}
-
-.edit-subtitle {
-  color: #555;
-  margin-bottom: 25px;
-}
-
-/* كارد التعديل */
-.edit-card {
-  background: var(--white);
-  padding: 30px 35px;
-  border-radius: 14px;
-  box-shadow: 0px 4px 15px rgba(0,0,0,0.12);
-  width: 100%;
-  max-width: 600px;
-}
-
-/* العناصر داخل الفورم */
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  font-weight: 700;
-  margin-bottom: 6px;
+/* Background */
+.student-edit-container {
+  height: 100vh;
   display: flex;
-  align-items: center;
-  color: var(--text-dark);
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 24px;
+  background: radial-gradient(circle at top left, #f6e9ff, #f3f0ff);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 }
 
-.icon {
-  margin-right: 8px;
-  color: var(--purple-dark);
-}
-
-input,
-select {
+/* Card */
+.edit-card {
   width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 2px solid var(--purple-light);
-  outline: none;
-  font-size: 15px;
+  max-width: 380px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(76, 20, 140, 0.1);
+  padding: 22px 24px 24px;
+  box-sizing: border-box;
 }
 
-input:focus,
-select:focus {
-  border-color: var(--purple-dark);
-}
-
-/* الزر */
-.save-btn {
-  width: 100%;
-  padding: 12px;
-  background: var(--purple-dark);
-  color: white;
-  border: none;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
+.edit-card .title {
+  font-size: 22px;
   font-weight: 700;
+  text-align: center;
+  margin-bottom: 4px;
+  color: #3b166d;
 }
 
-.save-btn:hover {
-  background: var(--purple-light);
+.edit-card .subtitle {
+  font-size: 13px;
+  color: #7a6a99;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+/* Form */
+.edit-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edit-card label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #3c2a72;
+  margin-bottom: 3px;
+}
+
+.edit-card input,
+.edit-card select {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #d1c4f7;
+  background-color: #faf7ff;
+  font-size: 13px;
+  height: 38px;
+  box-sizing: border-box;
+}
+
+.edit-card input:focus,
+.edit-card select:focus {
+  border-color: #6a46ff;
+  outline: none;
+  background: #fff;
+}
+
+/* Save button */
+.btn-save {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px 0;
+  border: none;
+  border-radius: 40px;
+  background: linear-gradient(90deg, #6a3bff, #b74bff);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(106, 59, 255, 0.25);
+  transition: 0.2s ease-in-out;
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(106, 59, 255, 0.35);
+}
+
+.btn-save:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 14px rgba(106, 59, 255, 0.2);
+}
+
+/* Error */
+.error-message {
+  background: #ffe5e8;
+  color: #b3263e;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-bottom: 6px;
 }

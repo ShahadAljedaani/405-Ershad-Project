@@ -1,94 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./SupervisorDashboard.css";
-import { FaFolderOpen } from "react-icons/fa";
+import SupervisorRequestsPanel from "../components/SupervisorRequestsPanel";
+
 
 function SupervisorDashboard() {
-  const matchingProjects = [
-    {
-      id: 1,
-      title: "Blockchain-Based Health Records",
-      field: "Blockchain & Web Development",
-      student: "Noura Ali",
-      status: "Pending",
-    },
-    {
-      id: 2,
-      title: "Web Portal for Research Management",
-      field: "Web Development",
-      student: "Ruba Hassan",
-      status: "Pending",
-    },
-  ];
+  const [supervisor, setSupervisor] = useState(null);
 
-  const supervisedProjects = [
-    {
-      id: 10,
-      title: "AI Smart Assistant",
-      field: "Artificial Intelligence",
-      student: "Aisha Alzahrani",
-      status: "In progress",
-    },
-    {
-      id: 11,
-      title: "Data Mining for E-Learning",
-      field: "Data Mining",
-      student: "Sarah Alharbi",
-      status: "Approved",
-    },
-  ];
+  useEffect(() => {
+    // try to read current user from localStorage (set in Profile / Login)
+    const stored = localStorage.getItem("currentUser");
+    if (stored) {
+      const user = JSON.parse(stored);
+      if (user.role === "supervisor") {
+        setSupervisor(user);
+      }
+    }
+  }, []);
+
+  const displayName = supervisor?.name || "Supervisor";
 
   return (
-    <div className="supervisor-dashboard-page">
+    <div className="supervisor-dashboard">
 
-   
-      <main className="dash-main">
-
-        <h1 className="page-title">Supervisor Dashboard</h1>
-        <p className="page-subtitle">
-          Review matching projects and manage your supervised projects.
+      {/* Top welcome section */}
+      <div className="supdash-header">
+        <h1 className="supdash-title">Welcome back, {displayName}</h1>
+        <p className="supdash-subtitle">
+          Review student requests and keep track of your supervision activity.
         </p>
+      </div>
 
-        
-        <h2 className="section-title">Matching Projects</h2>
-        <div className="projects-grid">
-          {matchingProjects.map((proj) => (
-            <div key={proj.id} className="project-card">
-              <h3>{proj.title}</h3>
-              <p><strong>Field:</strong> {proj.field}</p>
-              <p><strong>Student:</strong> {proj.student}</p>
-              <span className="status pending">Pending</span>
-
-              <a href={`/supervisor/project/${proj.id}`} className="details-btn">
-                <FaFolderOpen /> View Details
-              </a>
-            </div>
-          ))}
+      {/* Example summary cards (static, you can later connect to backend) */}
+      <div className="supdash-stats-row">
+        <div className="supdash-stat-card">
+          <span className="stat-label">Pending Requests</span>
+          <span className="stat-value">–</span>
+          <span className="stat-note">Handled below in the requests panel</span>
         </div>
 
-        <h2 className="section-title">My Supervised Projects</h2>
-        <div className="projects-grid">
-          {supervisedProjects.map((proj) => (
-            <div key={proj.id} className="project-card">
-              <h3>{proj.title}</h3>
-              <p><strong>Field:</strong> {proj.field}</p>
-              <p><strong>Student:</strong> {proj.student}</p>
-
-              <span
-                className={`status ${
-                  proj.status === "Approved" ? "approved" : "inprogress"
-                }`}
-              >
-                {proj.status}
-              </span>
-
-              <a href={`/supervisor/project/${proj.id}`} className="details-btn">
-                <FaFolderOpen /> View Details
-              </a>
-            </div>
-          ))}
+        <div className="supdash-stat-card">
+          <span className="stat-label">Active Students</span>
+          <span className="stat-value">–</span>
+          <span className="stat-note">You can wire this later to real data</span>
         </div>
 
-      </main>
+        <div className="supdash-stat-card">
+          <span className="stat-label">Notifications</span>
+          <span className="stat-value">–</span>
+          <span className="stat-note">Future place for alerts / messages</span>
+        </div>
+      </div>
+
+      {/* Student requests list */}
+      <SupervisorRequestsPanel />
     </div>
   );
 }

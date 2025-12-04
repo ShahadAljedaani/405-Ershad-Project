@@ -1,86 +1,150 @@
-import React from "react";
-import "./ProjectDetails.css";
-import {
-  FaArrowLeft,
-  FaFolderOpen,
-  FaCheckCircle,
-  FaPaperclip
-} from "react-icons/fa";
+// src/pages/ProjectDetails.jsx
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import "./ProjectDetails.css"; // your existing styles
+import { FaArrowLeft, FaDownload } from "react-icons/fa";
 
-import { toast } from "react-toastify";
+function ProjectDetails({ role }) {
+  const { id } = useParams(); // project id from URL
+  const navigate = useNavigate();
 
-function ProjectDetails({ role = "student" }) {
-  const project = {
-    id: 1,
-    title: "Blockchain-Based Health Records",
-    description:
-      "This project proposes a secure and decentralized platform for managing patient health records using blockchain technology.",
-    field: "Blockchain & Web Development",
-    student: "Noura Ali",
-    attachment: "health-records-proposal.pdf",
-    status: "Pending"
+  const [project, setProject] = useState(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        setError("");
+        setLoading(true);
+        const res = await axios.get(
+          `http://localhost:8888/ershad-api/project_details.php?id=${id}`,
+          { withCredentials: true }
+        );
+        setProject(res.data.project);
+      } catch (err) {
+        console.error("Project details error:", err.response?.data || err);
+        setError("Could not load project details.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProject();
+  }, [id]);
+
+  const handleBack = () => {
+    // student goes back to dashboard, supervisor to their dashboard
+    if (role === "supervisor") {
+      navigate("/supervisor/dashboard");
+    } else {
+      navigate("/student/dashboard");
+    }
   };
 
+  const handleDelete = async () => {
+    if (!window.confirm("Are you sure you want to delete this project?")) {
+      return;
+    }
+
+    try {
+      setDeleting(true);
+      await axios.post(
+        "http://localhost:8888/ershad-api/delete_project.php",
+        { project_id: parseInt(id, 10) },
+        { withCredentials: true }
+      );
+
+      alert("Project deleted.");
+      navigate("/student/dashboard");
+    } catch (err) {
+      console.error("Delete project error:", err.response?.data || err);
+      alert("Could not delete the project.");
+    } finally {
+      setDeleting(false);
+    }
+  };
+
+  const handleEdit = () => {
+    navigate(`/student/project/${id}/edit`);
+  };
+
+  if (loading) {
+    return <p style={{ padding: "2rem" }}>Loading project...</p>;
+  }
+
+  if (error || !project) {
+    return <p style={{ padding: "2rem" }}>{error || "Project not found."}</p>;
+  }
+
   return (
-    <div className="project-details-page">
-      <main className="project-main">
+    <main className="project-main">
+      {/* Back button */}
+      <button className="project-back-btn" onClick={handleBack}>
+        <FaArrowLeft className="back-icon" /> Back
+      </button>
 
-        <a
-          href={role === "student" ? "/student/dashboard" : "/supervisor/dashboard"}
-          className="back-btn"
-        >
-          <FaArrowLeft /> Back
-        </a>
+      {/* Header */}
+      <header className="project-header">
+        <h1 className="project-title">{project.title}</h1>
+        <span className="project-field">{project.field}</span>
+      </header>
 
-        <h1 className="title">{project.title}</h1>
-        <p className="subtitle">{project.field}</p>
+      {/* Card */}
+      <section className="project-card">
+        <h2 className="project-section-title">Project Overview</h2>
 
-        <div className="details-card">
+        <p className="project-description">{project.description}</p>
 
-          <h2>Project Overview</h2>
-          <p className="desc-text">{project.description}</p>
-
-          <p><strong>Student:</strong> {project.student}</p>
-
-          <p><strong>Status:</strong></p>
-          <span className={`status ${project.status.toLowerCase()}`}>
-            {project.status}
-          </span>
-
-          <p className="attach-title"><strong>Attachment:</strong></p>
-          <div className="attachment-box">
-            <FaPaperclip />
-            <span>{project.attachment}</span>
-            <a href="#" className="download-btn">Download</a>
-          </div>
-
-          <div className="actions">
-            {role === "student" && (
-              <>
-                <button className="delete-btn" onClick={() => toast.error("Project deleted!")}>
-                  Delete Project
-                </button>
-
-                <button className="edit-btn" onClick={() => toast.info("Edit mode coming soon!")}>
-                  Edit Project
-                </button>
-              </>
-            )}
-
-            {role === "supervisor" && (
-              <button
-                className="request-btn"
-                onClick={() => toast.success("Supervision request sent!")}
-              >
-                <FaCheckCircle /> Request Supervision
-              </button>
-            )}
-          </div>
-
+        <div className="project-meta-row">
+          <span className="meta-label">Student:</span>
+          <span className="meta-value">{project.student_name}</span>
         </div>
 
-      </main>
-    </div>
+        <div className="project-meta-row">
+          <span className="meta-label">Status:</span>
+          <span className={`status-pill status-${project.status}`}>
+            {project.status}
+          </span>
+        </div>
+
+        <div className="project-meta-row">
+          <span className="meta-label">Attachment:</span>
+          {project.attachment_url ? (
+            <a
+              href={project.attachment_url}
+              className="attachment-link"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaDownload className="attach-icon" />
+              Download file
+            </a>
+          ) : (
+            <span className="meta-value">No file attached.</span>
+          )}
+        </div>
+
+        {/* Actions – only for student */}
+        {role === "student" && (
+          <div className="project-actions">
+            <button
+              className="btn-delete-project"
+              onClick={handleDelete}
+              disabled={deleting}
+            >
+              {deleting ? "Deleting..." : "Delete Project"}
+            </button>
+
+            <button className="btn-edit-project" onClick={handleEdit}>
+              Edit Project
+            </button>
+          </div>
+        )}
+      </section>
+    </main>
   );
 }
 

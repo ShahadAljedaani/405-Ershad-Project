@@ -1,13 +1,27 @@
 import { FaUser, FaSignOutAlt, FaGithub } from "react-icons/fa";
 import { useNavigate, Link } from "react-router-dom";
 import "./Sidebar.css";
+import axios from "axios";                            // ✅ NEW
 
 export default function SupervisorSidebar() {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("role");   
-    navigate("/login");             
+  const handleLogout = async () => {
+    try {
+      // ✅ Log out from PHP backend session
+      await axios.get("http://localhost:8888/ershad-api/logout.php", {
+        withCredentials: true,
+      });
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+
+    // ✅ Clear frontend session
+    localStorage.removeItem("role");
+    localStorage.removeItem("currentUser");
+
+    // redirect to login
+    navigate("/login");
   };
 
   return (
@@ -27,7 +41,6 @@ export default function SupervisorSidebar() {
           </Link>
         </li>
 
-        {/* GitHub Recommendations */}
         <li>
           <Link to="/supervisor/recommendations">
             <FaGithub className="menu-icon" /> GitHub Project Recommendations

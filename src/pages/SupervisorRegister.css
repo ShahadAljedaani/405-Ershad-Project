@@ -1,102 +1,126 @@
-:root {
-  --purple-dark: #5A2FC2;
-  --purple-light: #9C7DFF;
-  --purple-bg: #f5efff;
-  --white: #fff;
-  --text-dark: #2a2a2a;
-}
-
+/* Background */
 .supervisor-register-container {
-  background: var(--purple-bg);
-  min-height: 100vh;
+  height: 100vh; /* full height */
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding-top: 60px;  
-  font-family: "Segoe UI", Tahoma, sans-serif;
+  align-items: flex-start;   /* moves card upward */
+  padding-top: 20px;         /* minimal space at top */
+  background: radial-gradient(circle at top left, #f6e9ff, #f3f0ff);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Smaller centered card */
+.register-card {
+  width: 100%;
+  max-width: 380px;            /* smaller card */
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(76, 20, 140, 0.10);
+  padding: 20px 24px 22px;     /* compact padding */
   box-sizing: border-box;
 }
 
-
-.register-card {
-  background: var(--white);
-  padding: 40px;
-  width: 420px;
-  border-radius: 15px;
-  box-shadow: 0px 5px 18px rgba(0, 0, 0, 0.15);
-  animation: fadeIn 0.8s ease;
-}
-
-.title {
-  font-size: 28px;
+/* Title */
+.register-card .title {
+  font-size: 22px;
   font-weight: 700;
-  color: var(--purple-dark);
   text-align: center;
+  margin-bottom: 4px;
+  color: #3b166d;
 }
 
-.subtitle {
-  color: #555;
-  margin-bottom: 20px;
+/* Subtitle */
+.register-card .subtitle {
+  font-size: 13px;
+  color: #7a6a99;
   text-align: center;
+  margin-bottom: 18px;
 }
 
-form {
-  margin-top: 10px;
+/* Compact Form */
+.register-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* small spacing */
 }
 
-label {
+/* Labels aligned left */
+.register-card label {
+  font-size: 12px;
   font-weight: 600;
-  margin-top: 10px;
-  display: block;
+  color: #3c2a72;
+  margin-bottom: 3px;
 }
 
-input, select {
+/* Input fields small + aligned */
+.register-card input,
+.register-card select,
+.register-card textarea {
   width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  border: 2px solid var(--purple-light);
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #d1c4f7;
+  background-color: #faf7ff;
+  font-size: 13px;
+  height: 38px;
+  box-sizing: border-box;
+}
+
+/* For textarea override height */
+.register-card textarea {
+  height: 60px;
+  resize: none;
+}
+
+.register-card input:focus,
+.register-card select:focus,
+.register-card textarea:focus {
+  border-color: #6a46ff;
   outline: none;
+  background: #fff;
 }
 
-input:focus, select:focus {
-  border-color: var(--purple-dark);
-}
-
+/* Button */
 .btn-register {
   width: 100%;
-  padding: 12px;
-  background: var(--purple-dark);
-  color: var(--white);
+  padding: 14px 0;
   border: none;
-  border-radius: 8px;
+  border-radius: 40px; /* rounded pill */
+  background: linear-gradient(90deg, #6a3bff, #b74bff); /* purple gradient */
+  color: #ffffff;
   font-size: 16px;
   font-weight: 600;
+  text-align: center;
   cursor: pointer;
-  transition: 0.3s;
+
+  transition: 0.2s ease-in-out;
+  box-shadow: 0 6px 18px rgba(106, 59, 255, 0.25); /* soft glow */
 }
 
 .btn-register:hover {
-  background: var(--purple-light);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(106, 59, 255, 0.35);
 }
 
+.btn-register:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 14px rgba(106, 59, 255, 0.2);
+}
+
+/* Login link */
 .login-link {
-  margin-top: 20px;
+  margin-top: 14px;
+  font-size: 12px;
   text-align: center;
+  color: #7a6a99;
 }
 
 .login-link a {
-  color: var(--purple-dark);
+  color: #5c30d9;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .login-link a:hover {
-  color: var(--purple-light);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
+  text-decoration: underline;
 }

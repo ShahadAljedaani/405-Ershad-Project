@@ -1,122 +1,101 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./Profile.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";   // ✅ better than <a>
 
-import {
-  FaEnvelope,
-  FaUniversity,
-  FaUserGraduate,
-  FaBook,
-  FaChalkboardTeacher,
-  FaUsers,
-} from "react-icons/fa";
+function Profile() {
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState("");
 
-function Profile({ role = "student" }) {
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:8888/ershad-api/profile.php",
+          { withCredentials: true }
+        );
+        setUser(res.data.user);
+        localStorage.setItem("currentUser", JSON.stringify(res.data.user));
+      } catch (err) {
+        console.error(err);
+        setError("Could not load profile. Please log in again.");
 
-  const navigate = useNavigate();
-
-  const user =
-    role === "student"
-      ? {
-          name: "Noura Ali",
-          email: "noura@student.com",
-          universityId: "431234567",
-          major: "Information Technology",
+        const stored = localStorage.getItem("currentUser");
+        if (stored) {
+          setUser(JSON.parse(stored));
         }
-      : {
-          name: "Dr. Rania Alhazmi",
-          email: "rania@kau.edu.sa",
-          title: "Assistant Professor",
-          field: "Blockchain & Web Development",
-          experience: "5 years",
-        };
+      }
+    };
 
-  const initial = user.name.charAt(0).toUpperCase();
+    fetchProfile();
+  }, []);
+
+  if (error && !user) {
+    return <p className="error-message">{error}</p>;
+  }
+
+  if (!user) {
+    return <p>Loading profile...</p>;
+  }
 
   return (
-    <div className="profile-page">
-      <h1 className="profile-header">Profile</h1>
-      <p className="profile-subtext">Manage your personal information</p>
-
+    <div className="profile-container">
       <div className="profile-card">
+        <h2 className="title">Profile</h2>
+        <p className="subtitle">
+          {user.role === "student" ? "Student" : "Supervisor"} Account
+        </p>
 
-        <div className="profile-top">
-          <div className="profile-avatar">{initial}</div>
-          <h2 className="profile-name">{user.name}</h2>
+        <div className="profile-field">
+          <span className="label">Name:</span>
+          <span className="value">{user.name}</span>
         </div>
 
-        <div className="profile-section">
-          <div className="section-title">Personal Info</div>
-
-          <div className="info-row">
-            <FaEnvelope className="info-icon" />
-            <div>
-              <div className="info-label">Email</div>
-              <div className="info-value">{user.email}</div>
-            </div>
-          </div>
+        <div className="profile-field">
+          <span className="label">Email:</span>
+          <span className="value">{user.email}</span>
         </div>
 
-        {role === "student" && (
-          <div className="profile-section">
-            <div className="section-title">Academic Details</div>
-
-            <div className="info-row">
-              <FaUniversity className="info-icon" />
-              <div>
-                <div className="info-label">University ID</div>
-                <div className="info-value">{user.universityId}</div>
-              </div>
+        {user.role === "student" && (
+          <>
+            <div className="profile-field">
+              <span className="label">University ID:</span>
+              <span className="value">{user.university_id || "-"}</span>
             </div>
-
-            <div className="info-row">
-              <FaBook className="info-icon" />
-              <div>
-                <div className="info-label">Major</div>
-                <div className="info-value">{user.major}</div>
-              </div>
+            <div className="profile-field">
+              <span className="label">Major:</span>
+              <span className="value">{user.major || "-"}</span>
             </div>
-          </div>
+          </>
         )}
 
-        {role === "supervisor" && (
-          <div className="profile-section">
-            <div className="section-title">Academic Details</div>
-
-            <div className="info-row">
-              <FaChalkboardTeacher className="info-icon" />
-              <div>
-                <div className="info-label">Academic Title</div>
-                <div className="info-value">{user.title}</div>
-              </div>
+        {user.role === "supervisor" && (
+          <>
+            <div className="profile-field">
+              <span className="label">Title:</span>
+              <span className="value">{user.title || "-"}</span>
             </div>
-
-            <div className="info-row">
-              <FaUserGraduate className="info-icon" />
-              <div>
-                <div className="info-label">Field</div>
-                <div className="info-value">{user.field}</div>
-              </div>
+            <div className="profile-field">
+              <span className="label">Expertise:</span>
+              <span className="value">{user.expertise || "-"}</span>
             </div>
-
-            <div className="info-row">
-              <FaUsers className="info-icon" />
-              <div>
-                <div className="info-label">Experience</div>
-                <div className="info-value">{user.experience}</div>
-              </div>
-            </div>
-          </div>
+          </>
         )}
 
-        {role === "student" && (
-          <button
-            className="edit-btn"
-            onClick={() => navigate("/student/edit-profile")}
-          >
-            Edit Profile
-          </button>
-        )}
+        {/* ✅ ONE button, changes link based on role */}
+        <div className="edit-profile-btn-container">
+          {user.role === "student" && (
+            <Link to="/student/edit-profile" className="edit-profile-btn">
+              Edit Profile
+            </Link>
+          )}
 
+          {user.role === "supervisor" && (
+            <Link to="/supervisor/edit-profile" className="edit-profile-btn">
+              Edit Profile
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

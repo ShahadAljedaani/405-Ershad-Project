@@ -1,91 +1,153 @@
-:root {
-  --purple-dark: #5A2FC2;
-  --purple-light: #9C7DFF;
-  --purple-bg: #f5efff;
-  --white: #fff;
-  --text-dark: #2a2a2a;
-}
-
-/* Main wrapper */
-.requests-main {
-  padding: 40px;
-  background: var(--purple-bg);
+/* full-page background (matches dashboard style) */
+.requests-page {
   min-height: 100vh;
-  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: #f3ecfe;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
 }
 
-/* Page Title */
-.page-title {
-  font-size: 30px;
+.requests-inner {
+  width: 100%;
+  max-width: 1050px;
+}
+
+/* header */
+.req-header {
+  margin-bottom: 1.8rem;
+}
+
+.req-title {
+  margin: 0;
+  font-size: 1.8rem;
   font-weight: 700;
-  color: var(--text-dark);
+  color: #3a236e;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
-.page-subtitle {
-  color: #555;
-  margin-bottom: 25px;
+.req-title-icon {
+  color: #6f32ff;
 }
 
-/* Requests Grid */
-.requests-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 25px;
+.req-subtitle {
+  margin-top: 0.4rem;
+  color: #7667a0;
+  font-size: 0.98rem;
 }
 
-/* Cards */
-.request-card {
-  background: var(--white);
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 16px rgba(0,0,0,0.10);
+/* card container */
+.req-card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 18px 45px rgba(93, 51, 190, 0.18);
+  padding: 1.4rem 1.6rem 1.5rem;
 }
 
-.supervisor-name {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--purple-dark);
-  margin-bottom: 10px;
+/* simple text states */
+.req-info {
+  color: #7667a0;
+  font-size: 0.95rem;
 }
 
-/* Status Badges */
-.status {
+.req-error {
+  color: #d9534f;
+  font-size: 0.95rem;
+}
+
+.req-empty {
+  color: #8b7bb6;
+  font-size: 0.95rem;
+}
+
+/* table */
+.req-table-wrapper {
+  overflow-x: auto;
+  margin-top: 0.3rem;
+}
+
+.req-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.req-table thead {
+  background: #f5f0ff;
+}
+
+.req-table th,
+.req-table td {
+  padding: 0.8rem 0.7rem;
+  text-align: left;
+  border-bottom: 1px solid #eee6ff;
+}
+
+.req-table th {
+  font-weight: 600;
+  color: #4a357d;
+  font-size: 0.85rem;
+}
+
+.req-th-icon {
+  margin-right: 0.3rem;
+  color: #6f32ff;
+}
+
+.req-table tbody tr:nth-child(even) {
+  background: #fbf8ff;
+}
+
+.req-table tbody tr:hover {
+  background: #f4ecff;
+}
+
+/* message column – keep on one line with ellipsis */
+.req-message-cell {
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* status badges */
+.req-status-badge {
   display: inline-block;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
   font-weight: 600;
-  margin-top: 12px;
+  text-transform: capitalize;
 }
 
-.status.pending {
-  background: #ffc107;
-  color: #7a5f00;
+/* adjust colors to your liking */
+.req-status-pending {
+  background: #ffe7aa;
+  color: #a26a00;
 }
 
-.status.accepted {
-  background: #b8f5cf;
-  color: #0d6b39;
+.req-status-accepted {
+  background: #c9f1d3;
+  color: #1d7f3b;
 }
 
-.status.rejected {
-  background: #ffb3b3;
-  color: #8a0000;
+.req-status-rejected {
+  background: #ffd0d0;
+  color: #b03535;
 }
 
-/* Cancel Button */
-.cancel-btn {
-  margin-top: 15px;
-  padding: 10px 18px;
-  background: #ff4d4d;
-  border: none;
-  border-radius: 8px;
-  color: var(--white);
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-}
+/* responsive */
+@media (max-width: 900px) {
+  .requests-inner {
+    padding: 0 1.5rem;
+  }
 
-.cancel-btn:hover {
-  background: #e60000;
+  .req-card {
+    padding: 1.1rem 1.1rem 1.3rem;
+  }
+
+  .req-title {
+    font-size: 1.5rem;
+  }
 }

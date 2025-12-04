@@ -17,6 +17,7 @@ import ProjectDetails from "./pages/ProjectDetails";
 
 import Profile from "./pages/Profile";
 import StudentEditProfile from "./pages/StudentEditProfile";
+import SupervisorEditProfile from "./pages/SupervisorEditProfile";
 
 import Sidebar from "./components/Sidebar";
 import SupervisorSidebar from "./components/SupervisorSidebar";
@@ -27,6 +28,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import About from "./pages/AboutUs";
 import GitHubRecommendations from "./pages/GitHubRecommendations";
+import StudentEditProject from "./pages/StudentEditProject";
 
 
 function LayoutWrapper() {
@@ -36,8 +38,8 @@ function LayoutWrapper() {
 
   const role =
     path.startsWith("/student") ? "student" :
-    path.startsWith("/supervisor") ? "supervisor" :
-    "none";
+      path.startsWith("/supervisor") ? "supervisor" :
+        "none";
 
   const noSidebarPages = ["/", "/login", "/student-register", "/supervisor-register"];
   const hideSidebar = noSidebarPages.includes(path);
@@ -157,6 +159,14 @@ function LayoutWrapper() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/supervisor/edit-profile"
+            element={
+              <ProtectedRoute allowedRole="supervisor">
+                <SupervisorEditProfile />
+              </ProtectedRoute>
+            }
+          />
 
           <Route
             path="/supervisor/project/:id"
@@ -172,6 +182,14 @@ function LayoutWrapper() {
             element={
               <ProtectedRoute allowedRole="supervisor">
                 <GitHubRecommendations />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/student/project/:id/edit"
+            element={
+              <ProtectedRoute allowedRole="student">
+                <StudentEditProject />
               </ProtectedRoute>
             }
           />

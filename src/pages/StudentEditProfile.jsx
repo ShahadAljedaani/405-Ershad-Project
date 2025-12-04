@@ -1,84 +1,151 @@
-import React, { useState } from "react";
+// src/pages/StudentEditProfile.jsx
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./StudentEditProfile.css";
-import { FaUser, FaEnvelope, FaIdBadge, FaSchool, FaPhone } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function StudentEditProfile() {
-  const [name, setName] = useState("Student Name");
-  const [email, setEmail] = useState("student@mail.com");
-  const [universityId, setUniversityId] = useState("441234567");
-  const [major, setMajor] = useState("Computer Science");
-  const [phone, setPhone] = useState("0551234567");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [universityId, setUniversityId] = useState("");
+  const [major, setMajor] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  // Load existing profile
+  useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        setError("");
+        const res = await axios.get(
+          "http://localhost:8888/ershad-api/profile.php",
+          { withCredentials: true }
+        );
+        const u = res.data.user;
+
+        if (u.role !== "student") {
+          setError("Only students can use this page.");
+          return;
+        }
+
+        setName(u.name || "");
+        setEmail(u.email || "");
+        setUniversityId(u.university_id || "");
+        setMajor(u.major || "");
+      } catch (err) {
+        console.error(err);
+        setError("Could not load profile. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProfile();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Profile updated successfully!");
+    setError("");
+
+    try {
+      const payload = {
+        name,
+        email,
+        role: "student",
+        university_id: universityId,
+        major,
+      };
+
+      const res = await axios.post(
+        "http://localhost:8888/ershad-api/update_profile.php",
+        payload,
+        { withCredentials: true }
+      );
+
+      // update localStorage so Profile page shows new data
+      if (res.data.user) {
+        localStorage.setItem("currentUser", JSON.stringify(res.data.user));
+      }
+
+      alert("Profile updated successfully!");
+      navigate("/student/profile");
+    } catch (err) {
+      console.error(err);
+      const msg =
+        err.response?.data?.error || "Failed to update profile. Try again.";
+      setError(msg);
+    }
   };
 
+  if (loading) {
+    return (
+      <div className="student-edit-container">
+        <div className="edit-card">
+          <p>Loading profile...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="edit-profile-page">
-
-      <h1 className="edit-title">Edit Profile</h1>
-      <p className="edit-subtitle">Update your personal information</p>
-
+    <div className="student-edit-container">
       <div className="edit-card">
+        <h2 className="title">Edit Profile</h2>
+        <p className="subtitle">Update your student information</p>
+
+        {error && <p className="error-message">{error}</p>}
 
         <form onSubmit={handleSubmit}>
+          <label>Full Name</label>
+          <input
+            type="text"
+            value={name}
+            placeholder="Enter your full name"
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
 
-          <div className="form-group">
-            <label><FaUser className="icon" /> Full Name</label>
-            <input 
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            placeholder="example@stu.edu.sa"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-          <div className="form-group">
-            <label><FaEnvelope className="icon" /> Email</label>
-            <input 
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
+          <label>University ID</label>
+          <input
+            type="text"
+            value={universityId}
+            placeholder="Enter your university ID"
+            onChange={(e) => setUniversityId(e.target.value)}
+          />
 
-          <div className="form-group">
-            <label><FaIdBadge className="icon" /> University ID</label>
-            <input 
-              type="text"
-              value={universityId}
-              onChange={(e) => setUniversityId(e.target.value)}
-              required
-            />
-          </div>
+          <label>Major / Field</label>
+          <select
+            value={major}
+            onChange={(e) => setMajor(e.target.value)}
+            required
+          >
+            <option value="">Select major</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Information Technology">
+              Information Technology
+            </option>
+            <option value="Software Engineering">
+              Software Engineering
+            </option>
+            <option value="Cyber Security">Cyber Security</option>
+          </select>
 
-          <div className="form-group">
-            <label><FaSchool className="icon" /> Major</label>
-            <select value={major} onChange={(e) => setMajor(e.target.value)}>
-              <option>Computer Science</option>
-              <option>Information Technology</option>
-              <option>Software Engineering</option>
-              <option>Cyber Security</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label><FaPhone className="icon" /> Phone Number</label>
-            <input 
-              type="text"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-            />
-          </div>
-
-          <button type="submit" className="save-btn">Save Changes</button>
-
+          <button type="submit" className="btn-save">
+            Save Changes
+          </button>
         </form>
       </div>
-
     </div>
   );
 }

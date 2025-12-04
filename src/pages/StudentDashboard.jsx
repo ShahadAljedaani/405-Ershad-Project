@@ -1,65 +1,133 @@
-import React from "react";
+// src/pages/StudentDashboard.jsx
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./StudentDashboard.css";
-import { FaUpload, FaUserFriends, FaEnvelopeOpenText } from "react-icons/fa";
+import { FaTasks } from "react-icons/fa";
+import { FaUpload, FaUsers, FaEnvelopeOpenText } from "react-icons/fa";
 
 function StudentDashboard() {
+  const navigate = useNavigate();
+
+  const [projects, setProjects] = useState([]);
+  const [loadingProjects, setLoadingProjects] = useState(true);
+  const [projectsError, setProjectsError] = useState("");
+
+  // Load student projects from backend
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setProjectsError("");
+        const res = await axios.get(
+          "http://localhost:8888/ershad-api/student_projects.php",
+          { withCredentials: true }
+        );
+        setProjects(res.data.projects || []);
+      } catch (err) {
+        console.error(err);
+        setProjectsError("Could not load your projects.");
+      } finally {
+        setLoadingProjects(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
   return (
-    <div className="dashboard-content">
-
+    <div className="student-dashboard">
       {/* Header */}
-      <h1 className="welcome">Welcome, Student</h1>
-      <p className="sub-welcome">Manage your project ideas and supervisor requests easily.</p>
+      <header className="student-dashboard-header">
+        <h1>Welcome, Student</h1>
+        <p>Manage your project ideas and supervisor requests easily.</p>
+      </header>
 
-      {/* Quick Actions */}
-      <div className="quick-actions">
+      {/* Quick actions */}
+      <section className="student-dashboard-actions">
+        <div className="dashboard-actions">
 
-        <a href="/student/upload" className="qa-card">
-          <FaUpload className="qa-icon" />
-          <h3>Upload Idea</h3>
-          <p>Submit a new project idea</p>
-        </a>
-
-        <a href="/student/supervisors" className="qa-card">
-          <FaUserFriends className="qa-icon" />
-          <h3>Supervisors</h3>
-          <p>Find suitable supervisors</p>
-        </a>
-
-        <a href="/student/requests" className="qa-card">
-          <FaEnvelopeOpenText className="qa-icon" />
-          <h3>Requests</h3>
-          <p>Check supervisor responses</p>
-        </a>
-
-      </div>
-
-      {/* Projects Section */}
-      <h2 className="section-title">My Projects</h2>
-
-      <div className="projects-grid">
-
-        <div className="project-card">
-          <h3>AI-based Medical Assistant</h3>
-          <p className="project-field">Field: Artificial Intelligence</p>
-
-          <div className="project-footer">
-            <span className="status pending">Pending Review</span>
-            <a href="/project/1" className="details-btn">View Details</a>
+          {/* Upload Idea */}
+          <div className="dashboard-card" onClick={() => navigate("/student/upload")}>
+            <FaUpload className="dashboard-icon" />
+            <h3>Upload Idea</h3>
+            <p>Submit a new project idea</p>
           </div>
+
+          {/* Supervisors */}
+          <div className="dashboard-card" onClick={() => navigate("/student/supervisors")}>
+            <FaUsers className="dashboard-icon" />
+            <h3>Supervisors</h3>
+            <p>Find suitable supervisors</p>
+          </div>
+
+          {/* Requests */}
+          <div className="dashboard-card" onClick={() => navigate("/student/requests")}>
+            <FaEnvelopeOpenText className="dashboard-icon" />
+            <h3>Requests</h3>
+            <p>Check supervisor responses</p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* My Projects */}
+      <section className="student-projects-section">
+        <div className="projects-header">
+          <h2>My Projects</h2>
         </div>
 
-        <div className="project-card">
-          <h3>Web-Based Student Tracking</h3>
-          <p className="project-field">Field: Web Development</p>
+        {projectsError && (
+          <p className="projects-error">{projectsError}</p>
+        )}
 
-          <div className="project-footer">
-            <span className="status approved">Approved</span>
-            <a href="/project/2" className="details-btn">View Details</a>
+        {loadingProjects && !projectsError && (
+          <p className="projects-info">Loading your projects…</p>
+        )}
+
+        {!loadingProjects && !projectsError && projects.length === 0 && (
+          <p className="projects-empty">
+            You don’t have any projects yet. Start by uploading a new idea.
+          </p>
+        )}
+
+        {!loadingProjects && !projectsError && projects.length > 0 && (
+          <div className="projects-grid">
+            {projects.map((p) => (
+              <div key={p.id} className="project-card">
+                <div className="project-header">
+                  <h3 className="project-title">{p.title}</h3>
+                  <span className={`status-pill status-${p.status}`}>
+                    {p.status}
+                  </span>
+                </div>
+
+                <p className="project-field">
+                  Field: {p.field || p.category || "—"}
+                </p>
+
+                {p.supervisor_name && (
+                  <p className="project-meta">
+                    Supervisor: <strong>{p.supervisor_name}</strong>
+                  </p>
+                )}
+
+                {p.created_at && (
+                  <p className="project-meta">
+                    Submitted: {p.created_at_formatted || p.created_at}
+                  </p>
+                )}
+
+                <button
+                  className="project-details-btn"
+                  onClick={() => navigate(`/student/project/${p.id}`)}
+                >
+                  View Details
+                </button>
+              </div>
+            ))}
           </div>
-        </div>
-
-      </div>
-
+        )}
+      </section>
     </div>
   );
 }

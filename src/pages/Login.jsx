@@ -1,70 +1,105 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("student"); 
+  const [role, setRole] = useState("student");
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault(); 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
 
-    localStorage.setItem("role", role);
+    try {
+      const res = await axios.post(
+        "http://localhost:8888/ershad-api/login.php", // change to /ERSHAD-API/ if needed
+        { email, password, role },
+        { withCredentials: true }
+      );
 
-    if (role === "student") {
-      navigate("/student/dashboard");
-    } else {
-      navigate("/supervisor/dashboard");
+      const user = res.data.user;
+
+      localStorage.setItem("role", user.role);
+      localStorage.setItem("currentUser", JSON.stringify(user));
+
+      if (user.role === "student") {
+        navigate("/student/dashboard");
+      } else {
+        navigate("/supervisor/dashboard");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Invalid email, password, or role.");
     }
   };
 
   return (
-    <div className="login-container">
-      <div className="login-card">
+    <div className="auth-page">
+      <div className="auth-card">
+        <h1 className="auth-title">Ershad</h1>
+        <p className="auth-subtitle">Sign in to your account</p>
 
-        <h2 className="title">Login</h2>
-        <p className="subtitle">Welcome back to Ershad</p>
+        {error && <p className="auth-error">{error}</p>}
 
-        <form onSubmit={handleLogin}>
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <label className="auth-label">
+            Role
+            <select
+              className="auth-input"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <option value="student">Student</option>
+              <option value="supervisor">Supervisor</option>
+            </select>
+          </label>
 
-          <label>Email</label>
-          <input 
-            type="email" 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-          />
+          <label className="auth-label">
+            Email
+            <input
+              className="auth-input"
+              type="email"
+              placeholder="example@stu.edu.sa"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
 
-          <label>Password</label>
-          <input 
-            type="password" 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-          />
+          <label className="auth-label">
+            Password
+            <input
+              className="auth-input"
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
 
-          
-          <label>Select Role</label>
-          <select 
-            value={role} 
-            onChange={(e) => setRole(e.target.value)}
-            className="role-select"
-          >
-            <option value="student">Student</option>
-            <option value="supervisor">Supervisor</option>
-          </select>
-
-          <button className="btn-login">Login</button>
+          <button type="submit" className="auth-button">
+            Login
+          </button>
         </form>
 
-        <div className="register-links">
-          <p>Don't have an account?</p>
-          <a href="/student-register">Register as Student</a>
-          <a href="/supervisor-register">Register as Supervisor</a>
+        {/* Register section */}
+        <div className="auth-register">
+          <p>Don’t have an account?</p>
+          <div className="auth-register-buttons">
+            <Link to="/student-register" className="auth-link-button">
+              Register as Student
+            </Link>
+            <Link to="/supervisor-register" className="auth-link-button secondary">
+              Register as Supervisor
+            </Link>
+          </div>
         </div>
-
       </div>
     </div>
   );
