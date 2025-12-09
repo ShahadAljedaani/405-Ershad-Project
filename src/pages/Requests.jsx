@@ -1,4 +1,3 @@
-// src/pages/Requests.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Requests.css";
@@ -35,7 +34,6 @@ function Requests() {
   return (
     <div className="requests-page">
       <div className="requests-inner">
-        {/* Header */}
         <header className="req-header">
           <h1 className="req-title">
             <FaPaperPlane className="req-title-icon" />
@@ -46,7 +44,6 @@ function Requests() {
           </p>
         </header>
 
-        {/* Card */}
         <section className="req-card">
           {loading && <p className="req-info">Loading your requests…</p>}
 

@@ -5,7 +5,6 @@
   box-sizing: border-box;
 }
 
-/* Back button */
 .project-back-btn {
   display: inline-flex;
   align-items: center;
@@ -26,7 +25,6 @@
   font-size: 14px;
 }
 
-/* Header */
 .project-header {
   text-align: center;
   margin-bottom: 32px;
@@ -44,9 +42,8 @@
   color: #7a6a99;
 }
 
-/* Card */
 .project-card {
-  max-width: 900px;
+  max-width: 1100;
   margin: 0 auto;
   background: #fff;
   border-radius: 22px;
@@ -87,7 +84,6 @@
   color: #41345a;
 }
 
-/* Status pills */
 .status-pill {
   display: inline-flex;
   align-items: center;
@@ -112,7 +108,6 @@
   color: #c03434;
 }
 
-/* Attachment box */
 .attachments-row {
   align-items: center;
 }
@@ -155,7 +150,6 @@
   font-size: 12px;
 }
 
-/* Action buttons */
 .project-actions {
   margin-top: 22px;
   display: flex;
@@ -186,7 +180,6 @@
   gap: 1rem;
 }
 
-/* DELETE BUTTON */
 .btn-delete-project {
   background-color: #f87171;
   color: white;
@@ -204,7 +197,6 @@
   transform: translateY(-2px);
 }
 
-/* EDIT BUTTON */
 .btn-edit-project {
   background-color: #a78bfa;
   color: white;

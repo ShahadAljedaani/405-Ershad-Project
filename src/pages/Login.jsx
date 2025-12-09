@@ -17,7 +17,7 @@ function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8888/ershad-api/login.php", // change to /ERSHAD-API/ if needed
+        "http://localhost:8888/ershad-api/login.php",
         { email, password, role },
         { withCredentials: true }
       );
@@ -88,7 +88,6 @@ function Login() {
           </button>
         </form>
 
-        {/* Register section */}
         <div className="auth-register">
           <p>Don’t have an account?</p>
           <div className="auth-register-buttons">

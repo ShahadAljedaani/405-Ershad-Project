@@ -1,4 +1,3 @@
-/* full-page background (matches dashboard style) */
 .requests-page {
   min-height: 100vh;
   background: #f3ecfe;
@@ -12,7 +11,6 @@
   max-width: 1050px;
 }
 
-/* header */
 .req-header {
   margin-bottom: 1.8rem;
 }
@@ -37,7 +35,6 @@
   font-size: 0.98rem;
 }
 
-/* card container */
 .req-card {
   background: #ffffff;
   border-radius: 20px;
@@ -45,7 +42,6 @@
   padding: 1.4rem 1.6rem 1.5rem;
 }
 
-/* simple text states */
 .req-info {
   color: #7667a0;
   font-size: 0.95rem;
@@ -103,7 +99,6 @@
   background: #f4ecff;
 }
 
-/* message column – keep on one line with ellipsis */
 .req-message-cell {
   max-width: 320px;
   white-space: nowrap;
@@ -111,7 +106,6 @@
   text-overflow: ellipsis;
 }
 
-/* status badges */
 .req-status-badge {
   display: inline-block;
   padding: 3px 10px;
@@ -121,7 +115,6 @@
   text-transform: capitalize;
 }
 
-/* adjust colors to your liking */
 .req-status-pending {
   background: #ffe7aa;
   color: #a26a00;
@@ -137,7 +130,6 @@
   color: #b03535;
 }
 
-/* responsive */
 @media (max-width: 900px) {
   .requests-inner {
     padding: 0 1.5rem;

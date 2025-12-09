@@ -1,6 +1,6 @@
 import "./Sidebar.css";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios"; // ✅ NEW
+import axios from "axios"; 
 import {
   FaHome,
   FaUpload,
@@ -16,7 +16,6 @@ function Sidebar({ role }) {
 
   const handleLogout = async () => {
     try {
-      // ✅ log out from PHP backend session
       await axios.get("http://localhost:8888/ershad-api/logout.php", {
         withCredentials: true,
       });
@@ -24,7 +23,6 @@ function Sidebar({ role }) {
       console.error("Logout error:", error);
     }
 
-    // ✅ clear frontend session
     localStorage.removeItem("role");
     localStorage.removeItem("currentUser");
 
@@ -71,7 +69,6 @@ function Sidebar({ role }) {
           </>
         )}
 
-        {/* Logout Button */}
         <li className="logout" onClick={handleLogout}>
           <FaSignOutAlt className="menu-icon" /> Logout
         </li>

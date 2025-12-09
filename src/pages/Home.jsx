@@ -5,7 +5,6 @@ function Home() {
   return (
     <div className="home-container">
 
-      {/* Navbar */}
       <nav className="navbar">
         <h2 className="logo">Ershad</h2>
         <div className="nav-links">
@@ -14,7 +13,6 @@ function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
       <header className="hero-section centered-hero">
         <h1>
           Welcome to <span>Ershad</span>

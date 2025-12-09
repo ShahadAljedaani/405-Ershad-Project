@@ -24,7 +24,6 @@
   background: #ff2b2b;
 }
 
-/* Main */
 .upload-main {
   flex: 1;
   background: var(--purple-bg);
@@ -32,7 +31,6 @@
   overflow-y: auto;
 }
 
-/* Header */
 .upload-header h1 {
   font-size: 30px;
   color: var(--text-dark);
@@ -44,7 +42,6 @@
   margin-bottom: 25px;
 }
 
-/* Card Form */
 .upload-card {
   background: var(--white);
   padding: 30px;
@@ -53,7 +50,6 @@
   max-width: 700px;
 }
 
-/* Form Groups */
 .form-group {
   margin-bottom: 18px;
 }
@@ -84,7 +80,6 @@ input:focus, textarea:focus, select:focus {
   border-color: var(--purple-dark);
 }
 
-/* File Upload Box */
 .file-box {
   border: 2px dashed var(--purple-light);
   padding: 14px;
@@ -104,7 +99,6 @@ input:focus, textarea:focus, select:focus {
   color: #666;
 }
 
-/* Submit Button */
 .submit-btn {
   width: 100%;
   padding: 12px;

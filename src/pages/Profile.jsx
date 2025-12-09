@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Profile.css";
-import { Link } from "react-router-dom";   // ✅ better than <a>
+import { Link } from "react-router-dom";   
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -82,7 +82,6 @@ function Profile() {
           </>
         )}
 
-        {/* ✅ ONE button, changes link based on role */}
         <div className="edit-profile-btn-container">
           {user.role === "student" && (
             <Link to="/student/edit-profile" className="edit-profile-btn">

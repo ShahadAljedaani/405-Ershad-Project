@@ -13,7 +13,6 @@ function SupervisorEditProfile() {
 
   const navigate = useNavigate();
 
-  // Load supervisor data
   useEffect(() => {
     const loadProfile = async () => {
       try {
@@ -62,7 +61,6 @@ function SupervisorEditProfile() {
         { withCredentials: true }
       );
 
-      // update localStorage so profile page updates immediately
       if (res.data.user) {
         localStorage.setItem("currentUser", JSON.stringify(res.data.user));
       }

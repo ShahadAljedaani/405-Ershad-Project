@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./UploadIdea.css"; // reuse the same styles
+import "./UploadIdea.css"; 
 import { FaHeading, FaFileAlt, FaTags, FaUpload, FaSave } from "react-icons/fa";
 
 function StudentEditProject() {
@@ -17,7 +17,6 @@ function StudentEditProject() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
-  // Load current project
   useEffect(() => {
     const fetchProject = async () => {
       try {

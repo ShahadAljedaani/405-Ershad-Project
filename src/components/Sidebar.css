@@ -6,7 +6,6 @@
   --text-dark: #2a2a2a;
 }
 
-/* ===== Sidebar Container ===== */
 .sidebar {
   width: 240px;
   background: #9C7DFF;
@@ -29,7 +28,6 @@
   margin-bottom: 40px;
 }
 
-/* ===== Menu ===== */
 
 .sidebar-menu {
   list-style: none;
@@ -58,7 +56,6 @@
   background: var(--purple-dark);
 }
 
-/* ===== Logout ===== */
 .logout a {
   background: #ff4f4f !important;
   border-radius: 8px;
@@ -66,4 +63,33 @@
 
 .logout a:hover {
   background: #ff2b2b !important;
+}
+.sidebar-menu,
+.menu {
+  list-style: none;
+  padding: 0;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-menu li a,
+.menu li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fdfaff;
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.sidebar-menu li a:hover,
+.menu li a:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
 }

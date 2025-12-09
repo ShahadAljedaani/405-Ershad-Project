@@ -2,7 +2,6 @@
   padding: 32px 40px;
 }
 
-/* Header */
 .student-dashboard-header h1 {
   font-size: 26px;
   font-weight: 700;
@@ -15,7 +14,6 @@
   color: #7a6a99;
 }
 
-/* Quick actions */
 .student-dashboard-actions {
   display: flex;
   flex-wrap: wrap;
@@ -52,7 +50,6 @@
   color: #7a6a99;
 }
 
-/* My Projects section */
 .student-projects-section h2 {
   font-size: 20px;
   font-weight: 700;
@@ -72,21 +69,29 @@
 }
 
 .projects-grid {
-  margin-top: 10px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-}
+  margin-top: 20px;
 
-/* Project card */
-.project-card {
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 18px 18px 16px;
-  box-shadow: 0 14px 30px rgba(66, 30, 120, 0.10);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 25px;
+
+  align-items: flex-end;      
+  width: 100%;                
+  padding-right: 80px;        
+}
+
+.project-card {
+  width: 480px;               
+  background: white;
+  padding: 28px;
+  border-radius: 28px;
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
 }
 
 .project-header {
@@ -115,7 +120,6 @@
   margin: 0;
 }
 
-/* Status pill (same style family as other pages) */
 .status-pill {
   display: inline-flex;
   align-items: center;
@@ -142,7 +146,6 @@
   color: #c93544;
 }
 
-/* View details button */
 .project-details-btn {
   margin-top: 10px;
   border: none;
@@ -171,7 +174,7 @@
 }
 
 .dashboard-card {
-  background: white;
+  background: #ffffff;
   padding: 2rem;
   border-radius: 20px;
   width: 260px;
@@ -188,11 +191,35 @@
 
 .dashboard-icon {
   font-size: 2.6rem;
-  color: #6a0dad; /* match your purple theme */
+  color: #6a0dad; 
   margin-bottom: 1rem;
 }
+.status-pill {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
 
-/* Responsive */
+.status-pending_review {
+  background: #fff4d7;
+  color: #9b6b00;
+}
+
+.status-assigned {
+  background: #e6f9e9;
+  color: #257a3e;
+}
+
+.status-rejected {
+  background: #ffe2e2;
+  color: #b32424;
+}
+
+.status-no_requests {
+  background: #eeeeee;
+  color: #555555;
+}
 @media (max-width: 900px) {
   .student-dashboard {
     padding: 20px 16px;

@@ -31,6 +31,7 @@ import GitHubRecommendations from "./pages/GitHubRecommendations";
 import StudentEditProject from "./pages/StudentEditProject";
 
 
+
 function LayoutWrapper() {
 
   const location = useLocation();
@@ -55,19 +56,16 @@ function LayoutWrapper() {
 
         <Routes>
 
-          {/* === Public Pages === */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/student-register" element={<StudentRegister />} />
           <Route path="/supervisor-register" element={<SupervisorRegister />} />
           <Route path="/about" element={<About />} />
 
-          {/* ===== Redirect Root Roles ===== */}
           <Route path="/student" element={<Navigate to="/student/dashboard" />} />
           <Route path="/supervisor" element={<Navigate to="/supervisor/dashboard" />} />
 
 
-          {/* === Protected Student Pages === */}
           <Route
             path="/student/dashboard"
             element={
@@ -141,7 +139,6 @@ function LayoutWrapper() {
           />
 
 
-          {/* === Protected Supervisor Pages === */}
           <Route
             path="/supervisor/dashboard"
             element={
@@ -193,7 +190,6 @@ function LayoutWrapper() {
               </ProtectedRoute>
             }
           />
-
         </Routes>
       </div>
     </div>

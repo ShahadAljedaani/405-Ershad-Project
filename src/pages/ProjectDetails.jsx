@@ -1,18 +1,28 @@
-// src/pages/ProjectDetails.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import "./ProjectDetails.css"; // your existing styles
+import "./ProjectDetails.css";
 import { FaArrowLeft, FaDownload } from "react-icons/fa";
 
 function ProjectDetails({ role }) {
-  const { id } = useParams(); // project id from URL
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [project, setProject] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
+
+  const formatStatusLabel = (status) => {
+    if (!status) return "Unknown";
+    const map = {
+      pending_review: "Pending",
+      assigned: "Accepted",
+      rejected: "Rejected",
+      no_requests: "No Supervisor Yet",
+    };
+    return map[status] || status;
+  };
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -36,7 +46,6 @@ function ProjectDetails({ role }) {
   }, [id]);
 
   const handleBack = () => {
-    // student goes back to dashboard, supervisor to their dashboard
     if (role === "supervisor") {
       navigate("/supervisor/dashboard");
     } else {
@@ -81,18 +90,15 @@ function ProjectDetails({ role }) {
 
   return (
     <main className="project-main">
-      {/* Back button */}
       <button className="project-back-btn" onClick={handleBack}>
         <FaArrowLeft className="back-icon" /> Back
       </button>
 
-      {/* Header */}
       <header className="project-header">
         <h1 className="project-title">{project.title}</h1>
         <span className="project-field">{project.field}</span>
       </header>
 
-      {/* Card */}
       <section className="project-card">
         <h2 className="project-section-title">Project Overview</h2>
 
@@ -103,10 +109,17 @@ function ProjectDetails({ role }) {
           <span className="meta-value">{project.student_name}</span>
         </div>
 
+        {project.supervisor_name && (
+          <div className="project-meta-row">
+            <span className="meta-label">Supervisor:</span>
+            <span className="meta-value">{project.supervisor_name}</span>
+          </div>
+        )}
+
         <div className="project-meta-row">
           <span className="meta-label">Status:</span>
           <span className={`status-pill status-${project.status}`}>
-            {project.status}
+            {formatStatusLabel(project.status)}
           </span>
         </div>
 
@@ -127,7 +140,6 @@ function ProjectDetails({ role }) {
           )}
         </div>
 
-        {/* Actions – only for student */}
         {role === "student" && (
           <div className="project-actions">
             <button

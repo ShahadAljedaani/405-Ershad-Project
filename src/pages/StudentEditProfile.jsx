@@ -1,4 +1,3 @@
-// src/pages/StudentEditProfile.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./StudentEditProfile.css";
@@ -14,7 +13,6 @@ function StudentEditProfile() {
 
   const navigate = useNavigate();
 
-  // Load existing profile
   useEffect(() => {
     const loadProfile = async () => {
       try {
@@ -64,7 +62,6 @@ function StudentEditProfile() {
         { withCredentials: true }
       );
 
-      // update localStorage so Profile page shows new data
       if (res.data.user) {
         localStorage.setItem("currentUser", JSON.stringify(res.data.user));
       }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./StudentRegister.css";
-import axios from "axios";                 // ✅ NEW
-import { useNavigate } from "react-router-dom"; // ✅ NEW
+import axios from "axios";                 
+import { useNavigate } from "react-router-dom"; 
 
 function StudentRegister() {
   const [name, setName] = useState("");
@@ -9,11 +9,11 @@ function StudentRegister() {
   const [universityId, setUniversityId] = useState("");
   const [password, setPassword] = useState("");
   const [major, setMajor] = useState("");
-  const [error, setError] = useState("");       // ✅ NEW
+  const [error, setError] = useState("");       
 
-  const navigate = useNavigate();               // ✅ NEW
+  const navigate = useNavigate();              
 
-  const handleSubmit = async (e) => {           // ✅ NEW
+  const handleSubmit = async (e) => {          
     e.preventDefault();
     setError("");
 
@@ -41,10 +41,8 @@ function StudentRegister() {
         <h2 className="title">Student Registration</h2>
         <p className="subtitle">Create your student account</p>
 
-        {/* ✅ show backend error if any */}
         {error && <p className="error-message">{error}</p>}
 
-        {/* ✅ add onSubmit + button type="submit" */}
         <form onSubmit={handleSubmit}>
           <label>Full Name</label>
           <input

@@ -6,7 +6,6 @@ function About() {
   return (
     <div className="about-page">
 
-      {/* Navbar */}
       <header className="about-header">
         <h2 className="logo">Ershad</h2>
         <nav>
@@ -15,7 +14,6 @@ function About() {
         </nav>
       </header>
 
-      {/* Main Content */}
       <main className="about-main">
         <h1 className="title">
           About <span>Ershad</span>
@@ -26,7 +24,6 @@ function About() {
           based on their graduation project idea.
         </p>
 
-        {/* Cards */}
         <div className="about-cards">
 
           <div className="card">

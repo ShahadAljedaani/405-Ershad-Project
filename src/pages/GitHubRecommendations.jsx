@@ -39,7 +39,6 @@ function GitHubRecommendations() {
 
       <h1 className="title">GitHub Project Recommendations</h1>
 
-      {/* Search Box */}
       <div className="search-box">
         <input
           type="text"
@@ -51,7 +50,6 @@ function GitHubRecommendations() {
         <button onClick={handleSearch}>Search</button>
       </div>
 
-      {/* Result Area */}
       <div className="results-area">
         {loading && <p className="loading">Loading...</p>}
         {error && <p className="error">{error}</p>}

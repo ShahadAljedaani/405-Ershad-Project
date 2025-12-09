@@ -74,10 +74,10 @@
 
 .btn-register {
   width: 100%;
-  padding: 14px 0; /* bigger height like your screenshot */
+  padding: 14px 0; 
   border: none;
-  border-radius: 40px; /* fully rounded pill */
-  background: linear-gradient(90deg, #6a3bff, #b74bff); /* purple gradient */
+  border-radius: 40px; 
+  background: linear-gradient(90deg, #6a3bff, #b74bff); 
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
@@ -85,7 +85,7 @@
   cursor: pointer;
 
   transition: 0.2s ease-in-out;
-  box-shadow: 0 6px 18px rgba(106, 59, 255, 0.25); /* soft glow */
+  box-shadow: 0 6px 18px rgba(106, 59, 255, 0.25); 
 }
 
 .btn-register:hover {
@@ -98,7 +98,6 @@
   box-shadow: 0 4px 14px rgba(106, 59, 255, 0.2);
 }
 
-/* Login link */
 .login-link {
   margin-top: 14px;
   font-size: 12px;

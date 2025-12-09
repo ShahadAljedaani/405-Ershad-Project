@@ -1,9 +1,7 @@
-// src/pages/StudentDashboard.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./StudentDashboard.css";
-import { FaTasks } from "react-icons/fa";
 import { FaUpload, FaUsers, FaEnvelopeOpenText } from "react-icons/fa";
 
 function StudentDashboard() {
@@ -13,7 +11,6 @@ function StudentDashboard() {
   const [loadingProjects, setLoadingProjects] = useState(true);
   const [projectsError, setProjectsError] = useState("");
 
-  // Load student projects from backend
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -36,31 +33,26 @@ function StudentDashboard() {
 
   return (
     <div className="student-dashboard">
-      {/* Header */}
       <header className="student-dashboard-header">
         <h1>Welcome, Student</h1>
         <p>Manage your project ideas and supervisor requests easily.</p>
       </header>
 
-      {/* Quick actions */}
       <section className="student-dashboard-actions">
         <div className="dashboard-actions">
 
-          {/* Upload Idea */}
           <div className="dashboard-card" onClick={() => navigate("/student/upload")}>
             <FaUpload className="dashboard-icon" />
             <h3>Upload Idea</h3>
             <p>Submit a new project idea</p>
           </div>
 
-          {/* Supervisors */}
           <div className="dashboard-card" onClick={() => navigate("/student/supervisors")}>
             <FaUsers className="dashboard-icon" />
             <h3>Supervisors</h3>
             <p>Find suitable supervisors</p>
           </div>
 
-          {/* Requests */}
           <div className="dashboard-card" onClick={() => navigate("/student/requests")}>
             <FaEnvelopeOpenText className="dashboard-icon" />
             <h3>Requests</h3>
@@ -70,7 +62,6 @@ function StudentDashboard() {
         </div>
       </section>
 
-      {/* My Projects */}
       <section className="student-projects-section">
         <div className="projects-header">
           <h2>My Projects</h2>
