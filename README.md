@@ -1,4 +1,8 @@
 Ershad 
+
+
+
+
 Ershad is a full-stack web application designed to help students submit project ideas and connect with supervisors based on expertise. Supervisors can review requests, view project details, and accept or reject student proposals.
 
 The system streamlines communication, supervision requests, and project tracking in a clean and user-friendly interface.
